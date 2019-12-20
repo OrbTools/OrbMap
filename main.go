@@ -8,7 +8,6 @@ import (
 
 func main() {
 	var orbs string
-	var ev int
 	flag.StringVar(&orbs, "orbs", "xiv.orb","Comma seperated string of orb files")
 	flag.Parse()
 	path, _ := os.Getwd()
