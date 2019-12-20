@@ -2,7 +2,6 @@ package orbweaver
 
 import (
 	"strings"
-	"strconv"
 	"encoding/binary"
 	"os"
 	"time"
@@ -42,14 +41,14 @@ func Proc_orb_files(orbs string, wd string) *KeyMaps {
 	}
 	return keymaps
 }
-func OrbLoop(ev int, km *KeyMaps) {
+func OrbLoop(km *KeyMaps) {
 	var event_codes = [...]uint16{41, 2, 3, 4, 5, 15, 16, 17, 18, 19, 58, 30, 31, 32, 33, 42, 44, 45, 46, 47, 56, 103, 106, 108, 105, 57}
 	ecm := make(map[uint16]int)
 	for i := 0; i<26; i++ {
 		ecm[event_codes[i]] = i
 	}
 	fmt.Println(string(ev))
-	f, err := os.Open("/dev/input/event"+strconv.Itoa(ev))
+	f, err := os.Open("/dev/input/by-id/usb-Razer_Razer_Orbweaver_Chroma-event-kbd")
 	if err != nil {
 		panic(err)
 	}
