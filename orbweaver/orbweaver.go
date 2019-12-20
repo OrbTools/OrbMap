@@ -47,7 +47,6 @@ func OrbLoop(km *KeyMaps) {
 	for i := 0; i<26; i++ {
 		ecm[event_codes[i]] = i
 	}
-	fmt.Println(string(ev))
 	f, err := os.Open("/dev/input/by-id/usb-Razer_Razer_Orbweaver_Chroma-event-kbd")
 	if err != nil {
 		panic(err)
