@@ -70,7 +70,7 @@ func OrbLoop(km *KeyMaps) {
 		fmt.Println(code)
 		fmt.Println(value)*/
 		if(typ == 1) {
-			if(value == 1 || value == 2) {
+			if(value == 1) {
 				vkm.KeyDown(km.Maps[km.Currentmap].Keymap[ecm[code]])
 			} else if (value == 2) {
 				//pass
