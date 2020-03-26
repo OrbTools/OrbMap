@@ -53,10 +53,10 @@ func ProcOrbFiles(orbs string, wd string) *KeyMaps {
 
 //OrbLoop Main loop for this device
 func OrbLoop(km *KeyMaps) {
-	var EventCodes = box.Get("orbweaver.dev")
-	ecm := make(map[byte]int)
+	EventCodes := box.Get("orbweaver.dev")
+	ecm := make(map[uint16]int)
 	for i := 0; i < 26; i++ {
-		ecm[EventCodes[i]] = i
+		ecm[uint16(EventCodes[i])] = i
 	}
 	f, err := os.Open("/dev/input/by-id/usb-Razer_Razer_Orbweaver_Chroma-event-kbd")
 	if err != nil {
