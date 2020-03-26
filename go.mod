@@ -1,4 +1,4 @@
-module github.com/Minizbot2012/orbmap
+module github.com/minizbot2012/orbmap
 
 go 1.14
 
