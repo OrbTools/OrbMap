@@ -54,7 +54,7 @@ func ProcOrbFiles(orbs string, wd string) *KeyMaps {
 //OrbLoop Main loop for this device
 func OrbLoop(km *KeyMaps) {
 	var EventCodes = box.Get("orbweaver.dev")
-	ecm := make(map[uint16]int)
+	ecm := make(map[byte]int)
 	for i := 0; i < 26; i++ {
 		ecm[EventCodes[i]] = i
 	}
