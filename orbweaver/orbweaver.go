@@ -1,39 +1,47 @@
+//go:generate boxy
+
 package orbweaver
 
 import (
-	"strings"
-	"encoding/binary"
-	"os"
-	"time"
-	"fmt"
 	"bytes"
+	"encoding/binary"
+	"fmt"
+	"os"
+	"strings"
+	"time"
+
 	"github.com/bendahl/uinput"
 )
 
+//KeyMap singular keymap
 type KeyMap struct {
 	Keymap [26]int
-	Color [3]byte
+	Color  [3]byte
 }
+
+//KeyMaps a set of keymaps
 type KeyMaps struct {
-	Maps [7]*KeyMap
-	Currentmap int 
-	MCount int
+	Maps       [7]*KeyMap
+	Currentmap int
+	MCount     int
 }
-func Proc_orb_files(orbs string, wd string) *KeyMaps {
+
+//ProcOrbFiles processes orbs
+func ProcOrbFiles(orbs string, wd string) *KeyMaps {
 	keymaps := new(KeyMaps)
 	idx := 0
-	fmt.Println(wd + ":" +orbs)
-	if(len(orbs) > 0) {
+	fmt.Println(wd + ":" + orbs)
+	if len(orbs) > 0 {
 		for _, orb := range strings.Split(orbs, ",") {
 			KMap := new(KeyMap)
-			inf, _ := os.Open(wd+"/"+orb)
-			for i := 0; i<26; i++ {
+			inf, _ := os.Open(wd + "/" + orb)
+			for i := 0; i < 26; i++ {
 				b := make([]byte, 2)
-				inf.Read(b);
+				inf.Read(b)
 				KMap.Keymap[i] = int(binary.LittleEndian.Uint16(b))
 			}
 			keymaps.Maps[idx] = KMap
-			idx+=1;
+			idx++
 			inf.Close()
 		}
 	} else {
@@ -41,11 +49,13 @@ func Proc_orb_files(orbs string, wd string) *KeyMaps {
 	}
 	return keymaps
 }
+
+//OrbLoop Main loop for this device
 func OrbLoop(km *KeyMaps) {
-	var event_codes = [...]uint16{41, 2, 3, 4, 5, 15, 16, 17, 18, 19, 58, 30, 31, 32, 33, 42, 44, 45, 46, 47, 56, 103, 106, 108, 105, 57}
+	var EventCodes = box.Get("orbweaver.dev")
 	ecm := make(map[uint16]int)
-	for i := 0; i<26; i++ {
-		ecm[event_codes[i]] = i
+	for i := 0; i < 26; i++ {
+		ecm[EventCodes[i]] = i
 	}
 	f, err := os.Open("/dev/input/by-id/usb-Razer_Razer_Orbweaver_Chroma-event-kbd")
 	if err != nil {
@@ -69,10 +79,10 @@ func OrbLoop(km *KeyMaps) {
 		fmt.Println(typ)
 		fmt.Println(code)
 		fmt.Println(value)*/
-		if(typ == 1) {
-			if(value == 1) {
+		if typ == 1 {
+			if value == 1 {
 				vkm.KeyDown(km.Maps[km.Currentmap].Keymap[ecm[code]])
-			} else if (value == 2) {
+			} else if value == 2 {
 				//pass
 			} else {
 				vkm.KeyUp(km.Maps[km.Currentmap].Keymap[ecm[code]])
