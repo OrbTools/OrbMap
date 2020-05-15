@@ -1,4 +1,5 @@
 //go:generate boxy
+
 package orbweaver
 
 import (
