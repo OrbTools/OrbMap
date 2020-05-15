@@ -8,11 +8,18 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"time"
 
-	"github.com/bendahl/uinput"
 	"github.com/minizbot2012/orbmap/box"
+	"github.com/minizbot2012/orbmap/interface/keyevents"
 )
+
+var eventcodes []byte
+var ecm map[uint16]int
+
+func init() {
+	eventcodes = box.Get("orbweaver.dev")
+	ecm = make(map[uint16]int)
+}
 
 //KeyMap singular keymap
 type KeyMap struct {
@@ -52,11 +59,9 @@ func ProcOrbFiles(orbs string, wd string) *KeyMaps {
 }
 
 //OrbLoop Main loop for this device
-func OrbLoop(km *KeyMaps) {
-	EventCodes := box.Get("orbweaver.dev")
-	ecm := make(map[uint16]int)
+func OrbLoop(km *KeyMaps, KeyBus chan keyevents.KeyEvent) {
 	for i := 0; i < 26; i++ {
-		ecm[uint16(EventCodes[i])] = i
+		ecm[uint16(eventcodes[i])] = i
 	}
 	f, err := os.Open("/dev/input/by-id/usb-Razer_Razer_Orbweaver_Chroma-event-kbd")
 	if err != nil {
@@ -64,30 +69,14 @@ func OrbLoop(km *KeyMaps) {
 	}
 	defer f.Close()
 	b := make([]byte, 24)
-	vkm, _ := uinput.CreateKeyboard("/dev/uinput", []byte("Orbmap"))
-	defer vkm.Close()
 	for {
 		f.Read(b)
-		sec := binary.LittleEndian.Uint64(b[0:8])
-		usec := binary.LittleEndian.Uint64(b[8:16])
-		t := time.Unix(int64(sec), int64(usec))
-		var _ = t
-		var value int32
-		typ := binary.LittleEndian.Uint16(b[16:18])
-		code := binary.LittleEndian.Uint16(b[18:20])
-		binary.Read(bytes.NewReader(b[20:]), binary.LittleEndian, &value)
-		/*fmt.Println(t)
-		fmt.Println(typ)
-		fmt.Println(code)
-		fmt.Println(value)*/
-		if typ == 1 {
-			if value == 1 {
-				vkm.KeyDown(km.Maps[km.Currentmap].Keymap[ecm[code]])
-			} else if value == 2 {
-				//pass
-			} else {
-				vkm.KeyUp(km.Maps[km.Currentmap].Keymap[ecm[code]])
-			}
+		KeyEv := keyevents.KeyEvent{}
+		KeyEv.Type = binary.LittleEndian.Uint16(b[16:18])
+		KeyEv.Code = km.Maps[km.Currentmap].Keymap[ecm[binary.LittleEndian.Uint16(b[18:20])]]
+		binary.Read(bytes.NewReader(b[20:]), binary.LittleEndian, &KeyEv.Value)
+		if KeyEv.Code != 0 {
+			KeyBus <- KeyEv
 		}
 	}
 }
