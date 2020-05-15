@@ -15,6 +15,8 @@ func main() {
 	path, _ := os.Getwd()
 	Maps := orbweaver.ProcOrbFiles(orbs, path)
 	KeyBus := make(chan keyevents.KeyEvent, 128)
-	go procKey(KeyBus)
+	for i := 0; i <= 4; i++ {
+		go procKey(KeyBus)
+	}
 	orbweaver.OrbLoop(Maps, KeyBus)
 }

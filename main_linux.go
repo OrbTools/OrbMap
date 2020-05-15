@@ -5,9 +5,12 @@ import (
 	"github.com/minizbot2012/orbmap/interface/keyevents"
 )
 
+var vkm uinput.Keyboard
+
+func init() {
+	vkm, _ = uinput.CreateKeyboard("/dev/uinput", []byte("Orbmap"))
+}
 func procKey(kb chan keyevents.KeyEvent) {
-	vkm, _ := uinput.CreateKeyboard("/dev/uinput", []byte("Orbmap"))
-	defer vkm.Close()
 	for {
 		KeyEv := <-kb
 		if KeyEv.Type == 1 {
