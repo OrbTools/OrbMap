@@ -2,7 +2,6 @@ package orbweaver
 
 import (
 	"encoding/binary"
-	"fmt"
 	"os"
 	"strings"
 
@@ -32,9 +31,8 @@ type KeyMaps struct {
 
 //ProcOrbFiles processes orbs
 func ProcOrbFiles(orbs string, wd string) *KeyMaps {
-	keymaps := new(KeyMaps)
+	keymaps := &KeyMaps{}
 	idx := 0
-	fmt.Println(wd + ":" + orbs)
 	if len(orbs) > 0 {
 		for _, orb := range strings.Split(orbs, ",") {
 			KMap := new(KeyMap)

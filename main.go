@@ -14,7 +14,7 @@ func main() {
 	flag.Parse()
 	path, _ := os.Getwd()
 	Maps := orbweaver.ProcOrbFiles(orbs, path)
-	KeyBus := make(chan keyevents.KeyEvent, 128)
+	KeyBus := make(chan *keyevents.KeyEvent, 128)
 	for i := 0; i <= 4; i++ {
 		go procKey(KeyBus)
 	}
