@@ -5,7 +5,6 @@ package orbweaver
 import (
 	"bytes"
 	"encoding/binary"
-	"fmt"
 	"os"
 
 	"github.com/minizbot2012/orbmap/interface/keyevents"
@@ -29,7 +28,6 @@ func OrbLoop(km *KeyMaps, KeyBus chan *keyevents.KeyEvent) {
 		KeyEv.Code = km.Maps[km.Currentmap].Keymap[ecm[binary.LittleEndian.Uint16(b[18:20])]]
 		binary.Read(bytes.NewReader(b[20:]), binary.LittleEndian, &KeyEv.Value)
 		if KeyEv.Code != 0 && KeyEv.Type != 4 {
-			fmt.Println(KeyEv.Type, KeyEv.Code, KeyEv.Value)
 			KeyBus <- KeyEv
 		}
 	}
