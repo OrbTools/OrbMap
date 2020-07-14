@@ -10,7 +10,9 @@ var vkm uinput.Keyboard
 func init() {
 	vkm, _ = uinput.CreateKeyboard("/dev/uinput", []byte("Orbmap"))
 }
-func procKey(kb chan *keyevents.KeyEvent) {
+
+//ProcKey keyboard emulator loop
+func ProcKey(kb chan *keyevents.KeyEvent) {
 	for {
 		KeyEv := <-kb
 		if KeyEv.Type == 1 {
