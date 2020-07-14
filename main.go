@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/minizbot2012/orbmap/interface/keyevents"
-	"github.com/minizbot2012/orbmap/orbweaver"
 	"github.com/minizbot2012/orbmap/keypad"
+	"github.com/minizbot2012/orbmap/orbweaver"
 )
 
 func main() {
