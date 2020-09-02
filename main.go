@@ -1,3 +1,4 @@
+//generate:boxy
 package main
 
 import (
