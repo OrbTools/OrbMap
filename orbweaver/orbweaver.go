@@ -18,7 +18,7 @@ func init() {
 
 //KeyMap singular keymap
 type KeyMap struct {
-	Keymap [26]int
+	Keymap [26]uint16
 	Color  [3]byte
 }
 
@@ -35,16 +35,13 @@ func ProcOrbFiles(orbs string, wd string) *KeyMaps {
 	idx := 0
 	if len(orbs) > 0 {
 		for _, orb := range strings.Split(orbs, ",") {
-			KMap := new(KeyMap)
+			KMap := &KeyMap{}
 			inf, _ := os.Open(wd + "/" + orb)
-			for i := 0; i < 26; i++ {
-				b := make([]byte, 2)
-				inf.Read(b)
-				KMap.Keymap[i] = int(binary.LittleEndian.Uint16(b))
+			err := binary.Read(inf, binary.LittleEndian, KMap)
+			if err != nil {
+				panic(err)
 			}
 			keymaps.Maps[idx] = KMap
-			idx++
-			inf.Close()
 		}
 	} else {
 		panic("No orbs")

@@ -7,27 +7,22 @@ import (
 
 var vkm uinput.Keyboard = nil
 
-func init() {
+//ProcKey keyboard emulator loop
+func ProcKey(kb chan *keyevents.KeyEvent) {
 	var err error
 	vkm, err = uinput.CreateKeyboard("/dev/uinput", []byte("Orbmap"))
 	if err != nil {
 		panic(err)
 	}
-}
-
-//ProcKey keyboard emulator loop
-func ProcKey(kb chan *keyevents.KeyEvent) {
-	for vkm == nil {
-		println("VKM not init")
-	}
+	defer vkm.Close()
 	for {
 		KeyEv := <-kb
 		if KeyEv.Type == 1 {
 			if KeyEv.Value == 1 {
-				vkm.KeyDown(KeyEv.Code)
+				vkm.KeyDown(int(KeyEv.Code))
 			} else if KeyEv.Value == 2 {
 			} else {
-				vkm.KeyUp(KeyEv.Code)
+				vkm.KeyUp(int(KeyEv.Code))
 			}
 		}
 	}

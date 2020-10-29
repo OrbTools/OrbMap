@@ -4,21 +4,26 @@ package main
 import (
 	"flag"
 	"os"
+	"strings"
 
+	"github.com/minizbot2012/orbmap/box"
 	"github.com/minizbot2012/orbmap/interface/keyevents"
 	"github.com/minizbot2012/orbmap/keypad"
 	"github.com/minizbot2012/orbmap/orbweaver"
 )
 
 func main() {
-	var orbs string
-	flag.StringVar(&orbs, "orbs", "xiv.orb", "Comma seperated string of orb files")
+	var orbs []*string
+	for _, v := range box.List() {
+		println(v)
+		orbs = append(orbs, flag.String(strings.Split(v, ".")[0], "", "Comma seperated string of orbs for the orbweaver"))
+	}
 	flag.Parse()
 	path, _ := os.Getwd()
-	Maps := orbweaver.ProcOrbFiles(orbs, path)
 	KeyBus := make(chan *keyevents.KeyEvent, 128)
-	for i := 0; i <= 4; i++ {
-		go keypad.ProcKey(KeyBus)
+	if *orbs[0] != "" {
+		Maps := orbweaver.ProcOrbFiles(*orbs[0], path)
+		go orbweaver.OrbLoop(Maps, KeyBus)
 	}
-	orbweaver.OrbLoop(Maps, KeyBus)
+	keypad.ProcKey(KeyBus)
 }
