@@ -7,21 +7,7 @@ import (
 	"github.com/minizbot2012/orbmap/interface/keyevents"
 )
 
-type keyboardInput struct {
-	wVk         uint16
-	wScan       uint16
-	dwFlags     uint32
-	time        uint32
-	dwExtraInfo uint64
-}
-
-type input struct {
-	inputType uint32
-	ki        keyboardInput
-	padding   uint64
-}
-
-//Windows support is so weird
+//ProcKey Windows support is so weird
 func ProcKey(kb chan *keyevents.KeyEvent) {
 	for {
 		KeyEv := <-kb

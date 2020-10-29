@@ -7,9 +7,9 @@ import (
 	"strings"
 
 	"github.com/minizbot2012/orbmap/box"
+	"github.com/minizbot2012/orbmap/devices/orbweaver"
 	"github.com/minizbot2012/orbmap/interface/keyevents"
 	"github.com/minizbot2012/orbmap/keypad"
-	"github.com/minizbot2012/orbmap/orbweaver"
 )
 
 func main() {
