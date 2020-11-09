@@ -37,6 +37,7 @@ func ProcOrbFiles(orbs string, wd string) *KeyMaps {
 		for _, orb := range strings.Split(orbs, ",") {
 			KMap := &KeyMap{}
 			inf, _ := os.Open(wd + "/" + orb)
+			defer inf.Close()
 			err := binary.Read(inf, binary.LittleEndian, KMap)
 			if err != nil {
 				panic(err)
