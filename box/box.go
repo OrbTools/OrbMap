@@ -24,7 +24,7 @@ func (e *embedBox) Get(file string) []byte {
 
 func (e *embedBox) List() []string {
 	keys := make([]string, 0)
-	for k, _ := range e.storage {
+	for k := range e.storage {
 		keys = append(keys, k)
 	}
 	return keys
