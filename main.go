@@ -6,10 +6,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/minizbot2012/orbmap/box"
-	"github.com/minizbot2012/orbmap/devices/orbweaver"
-	"github.com/minizbot2012/orbmap/interface/keyevents"
-	"github.com/minizbot2012/orbmap/keypad"
+	"github.com/OrbTools/OrbMap/box"
+	"github.com/OrbTools/OrbMap/devices/orbweaver"
+	"github.com/OrbTools/OrbMap/emu"
+	"github.com/OrbTools/OrbMap/interface/keyevents"
 )
 
 func main() {
@@ -25,5 +25,5 @@ func main() {
 		Maps := orbweaver.ProcOrbFiles(*orbs[0], path)
 		go orbweaver.OrbLoop(Maps, KeyBus)
 	}
-	keypad.ProcKey(KeyBus)
+	emu.ProcKey(KeyBus)
 }

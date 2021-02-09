@@ -1,3 +1,6 @@
+//go:generate boxy
+//build:+windows
+
 package orbweaver
 
 import (
@@ -5,9 +8,9 @@ import (
 	"encoding/binary"
 	"encoding/hex"
 
+	"github.com/OrbTools/OrbMap/devices/common"
+	"github.com/OrbTools/OrbMap/interface/keyevents"
 	"github.com/google/gousb"
-	"github.com/minizbot2012/orbmap/devices/common"
-	"github.com/minizbot2012/orbmap/interface/keyevents"
 )
 
 const (

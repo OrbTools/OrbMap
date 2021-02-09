@@ -1,4 +1,5 @@
 //go:generate boxy
+//build:+linux
 
 package orbweaver
 
@@ -7,7 +8,7 @@ import (
 	"encoding/binary"
 	"os"
 
-	"github.com/minizbot2012/orbmap/interface/keyevents"
+	"github.com/OrbTools/orbmap/interface/keyevents"
 )
 
 //OrbLoop Main loop for this device

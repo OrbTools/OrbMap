@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/minizbot2012/orbmap/box"
+	"github.com/OrbTools/OrbMap/box"
 )
 
 var eventcodes []byte
