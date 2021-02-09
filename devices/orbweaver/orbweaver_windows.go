@@ -8,7 +8,8 @@ import (
 	"encoding/binary"
 	"encoding/hex"
 
-	"github.com/OrbTools/OrbMap/devices/common"
+	"github.com/OrbTools/OrbCommon/devices/common"
+	"github.com/OrbTools/OrbCommon/devices/orbweaver"
 	"github.com/OrbTools/OrbMap/interface/keyevents"
 	"github.com/google/gousb"
 )
@@ -81,7 +82,7 @@ func contains(s []byte, e byte) bool {
 }
 
 //OrbLoop Main loop for this device
-func OrbLoop(km *KeyMaps, KeyBus chan *keyevents.KeyEvent) {
+func OrbLoop(km *orbweaver.KeyMaps, KeyBus chan *keyevents.KeyEvent) {
 	for i := 0; i < 26; i++ {
 		ecm[uint16(eventcodes[i])] = i
 	}

@@ -3,8 +3,8 @@
 package emu
 
 import (
+	"github.com/OrbTools/OrbMap/interface/keyevents"
 	"github.com/bendahl/uinput"
-	"github.com/minizbot2012/orbmap/interface/keyevents"
 )
 
 var vkm uinput.Keyboard = nil

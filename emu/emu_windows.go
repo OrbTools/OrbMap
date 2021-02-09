@@ -6,7 +6,7 @@ import (
 	"syscall"
 	"unsafe"
 
-	"github.com/OrbTools/orbmap/interface/keyevents"
+	"github.com/OrbTools/OrbMap/interface/keyevents"
 	"github.com/lxn/win"
 )
 

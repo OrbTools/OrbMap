@@ -8,7 +8,7 @@ import (
 	"encoding/binary"
 	"os"
 
-	"github.com/OrbTools/orbmap/interface/keyevents"
+	"github.com/OrbTools/OrbMap/interface/keyevents"
 )
 
 //OrbLoop Main loop for this device
