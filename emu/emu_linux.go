@@ -1,4 +1,4 @@
-//build:+linux
+// +build linux !windows
 
 package emu
 
@@ -10,7 +10,8 @@ import (
 var vkm uinput.Keyboard = nil
 
 //ProcKey keyboard emulator loop
-func ProcKey(kb chan *keyevents.KeyEvent) {
+func ProcKey(kb chan keyevents.KeyEvent) {
+	println("Emu Unix Starting")
 	var err error
 	vkm, err = uinput.CreateKeyboard("/dev/uinput", []byte("Orbmap"))
 	if err != nil {

@@ -1,4 +1,4 @@
-//build:+windows
+// +build windows
 
 package emu
 
@@ -11,50 +11,46 @@ import (
 )
 
 var user32 = syscall.NewLazyDLL("user32.dll")
-var procKeyBd = user32.NewProc("keybd_event")
 var mapVK = user32.NewProc("MapVirtualKeyA")
 
-func downKey(key int) {
-	flag := 0
-	var in win.KEYBD_INPUT
-	vs, _, _ := mapVK.Call(uintptr(uint32(key)), uintptr(1))
-	vsc := uint16(vs)
-	println(vsc)
-	if vsc == win.VK_SHIFT || vsc == win.VK_CONTROL || vsc == win.VK_MENU {
-		flag |= win.KEYEVENTF_EXTENDEDKEY
+func downKey(key uint16) {
+	in := []win.KEYBD_INPUT{
+		{
+			Type: win.INPUT_KEYBOARD,
+			Ki: win.KEYBDINPUT{
+				DwExtraInfo: 0,
+				WScan:       key,
+				DwFlags:     win.KEYEVENTF_SCANCODE,
+				Time:        0,
+			},
+		},
 	}
-	in.Type = 1
-	in.Ki.DwExtraInfo = 0
-	in.Ki.DwFlags = uint32(flag)
-	in.Ki.WScan = 0
-	in.Ki.WVk = vsc
-
-	win.SendInput(1, unsafe.Pointer(&in), int32(unsafe.Sizeof(in)))
+	win.SendInput(1, unsafe.Pointer(&in[0]), int32(unsafe.Sizeof(in[0])))
 }
-func upKey(key int) {
-	flag := win.KEYEVENTF_KEYUP
-	var in win.KEYBD_INPUT
-	vs, _, _ := mapVK.Call(uintptr(uint32(key)), uintptr(1))
-	vsc := uint16(vs)
-	if vsc == win.VK_SHIFT || vsc == win.VK_CONTROL || vsc == win.VK_MENU {
-		flag |= win.KEYEVENTF_EXTENDEDKEY
+func upKey(key uint16) {
+	in := []win.KEYBD_INPUT{
+		{
+			Type: win.INPUT_KEYBOARD,
+			Ki: win.KEYBDINPUT{
+				DwExtraInfo: 0,
+				WScan:       key,
+				DwFlags:     win.KEYEVENTF_KEYUP | win.KEYEVENTF_SCANCODE,
+				Time:        0,
+			},
+		},
 	}
-	in.Type = 1
-	in.Ki.DwExtraInfo = 0
-	in.Ki.DwFlags = uint32(flag)
-	in.Ki.WScan = 0
-	in.Ki.WVk = vsc
-	win.SendInput(1, unsafe.Pointer(&in), int32(unsafe.Sizeof(in)))
+	win.SendInput(1, unsafe.Pointer(&in[0]), int32(unsafe.Sizeof(in[0])))
 }
 
 //ProcKey Windows support is so weird
-func ProcKey(kb chan *keyevents.KeyEvent) {
+func ProcKey(kb chan keyevents.KeyEvent) {
+	println("Emu Windows Starting")
 	for {
 		KeyEv := <-kb
 		if KeyEv.Type == 1 {
-			downKey(int(KeyEv.Code))
+			downKey(KeyEv.Code)
 		} else if KeyEv.Type == 2 {
-			upKey(int(KeyEv.Code))
+			upKey(KeyEv.Code)
 		}
 	}
 }

@@ -10,13 +10,10 @@ import (
 )
 
 func main() {
-	var orbs *string
-	orbs = flag.String("orbweaver", "", "Comma seperated string of orbs for the orbweaver")
+	orbs := flag.String("orbweaver", "", "Comma seperated string of orbs for the orbweaver")
 	flag.Parse()
-	KeyBus := make(chan *keyevents.KeyEvent, 128)
-	if *orbs != "" {
-		Maps := orbweaver.ProcOrbFiles(*orbs)
-		go orbweaver.OrbLoop(Maps, KeyBus)
-	}
+	KeyBus := make(chan keyevents.KeyEvent, 128)
+	Maps := orbweaver.ProcOrbFiles(*orbs)
+	go orbweaver.OrbLoop(Maps, KeyBus)
 	emu.ProcKey(KeyBus)
 }

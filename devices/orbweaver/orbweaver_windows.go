@@ -1,22 +1,24 @@
-//go:generate boxy
-//build:+windows
+// +build windows
 
 package orbweaver
 
 import (
 	"bytes"
 	"encoding/binary"
-	"encoding/hex"
+	"fmt"
 
-	"github.com/OrbTools/OrbCommon/devices/orbweaver"
+	morb "github.com/OrbTools/OrbCommon/devices/orbweaver"
 	"github.com/OrbTools/OrbCommon/hid"
 	"github.com/OrbTools/OrbMap/interface/keyevents"
 	"github.com/google/gousb"
 )
 
 const (
-	vendor = gousb.ID(0x1532)
-	prod   = gousb.ID(0x0207)
+	vendor           = gousb.ID(0x1532)
+	prod             = gousb.ID(0x0207)
+	leftControl byte = 0x1
+	leftShift   byte = 0x2
+	leftAlt     byte = 0x4
 )
 
 type swaps struct {
@@ -25,23 +27,19 @@ type swaps struct {
 }
 
 type swapInt struct {
-	Modifier byte
-	Reserved byte
-	K1       byte
-	K2       byte
-	K3       byte
-	K4       byte
-	K5       byte
-	K6       byte
-}
-
-var trans = map[int]int{
-	0: 0,
-	2: 0,
+	M1 byte
+	M2 byte
+	M3 byte
+	K1 byte
+	K2 byte
+	K3 byte
+	K4 byte
+	K5 byte
+	K6 byte
 }
 
 func (s *swapInt) contains(k byte) bool {
-	return (s.K1 == k || s.K2 == k || s.K3 == k || s.K4 == k || s.K5 == k || s.K6 == k)
+	return (s.K1 == k || s.K2 == k || s.K3 == k || s.K4 == k || s.K5 == k || s.K6 == k || s.M1 == k || s.M2 == k || s.M3 == k)
 }
 
 func (s *swaps) swap() {
@@ -49,48 +47,72 @@ func (s *swaps) swap() {
 	s.S1 = s.S2
 	s.S2 = ss
 }
-func (s *swapInt) Releases(s2 *swapInt) []byte {
+
+func trans(M byte) []byte {
 	r := make([]byte, 0)
-	if !s.contains(s2.K1) {
-		r = append(r, s2.K1)
+	if (M & leftShift) != 0 {
+		r = append(r, 42)
+	} else {
+		r = append(r, 0)
 	}
-	if !s.contains(s2.K2) {
-		r = append(r, s2.K2)
+	if (M & leftControl) != 0 {
+		r = append(r, 29)
+	} else {
+		r = append(r, 0)
 	}
-	if !s.contains(s2.K3) {
-		r = append(r, s2.K3)
-	}
-	if !s.contains((s2.K4)) {
-		r = append(r, s2.K4)
-	}
-	if !s.contains(s2.K5) {
-		r = append(r, s2.K5)
-	}
-	if !s.contains(s2.K6) {
-		r = append(r, s2.K6)
+	if (M & leftAlt) != 0 {
+		r = append(r, 56)
+	} else {
+		r = append(r, 0)
 	}
 	return r
 }
 
-func contains(s []byte, e byte) bool {
-	for _, a := range s {
-		if a == e {
-			return true
-		}
+func (s *swapInt) Differ(s2 *swapInt) []byte {
+	r := make([]byte, 0)
+	if !s2.contains(s.M1) {
+		r = append(r, s.M1)
 	}
-	return false
+	if !s2.contains(s.M2) {
+		r = append(r, s.M2)
+	}
+	if !s2.contains(s.M3) {
+		r = append(r, s.M3)
+	}
+	if !s2.contains(s.K1) {
+		r = append(r, s.K1)
+	}
+	if !s2.contains(s.K2) {
+		r = append(r, s.K2)
+	}
+	if !s2.contains(s.K3) {
+		r = append(r, s.K3)
+	}
+	if !s2.contains(s.K4) {
+		r = append(r, s.K4)
+	}
+	if !s2.contains(s.K5) {
+		r = append(r, s.K5)
+	}
+	if !s2.contains(s.K6) {
+		r = append(r, s.K6)
+	}
+	return r
 }
 
 //OrbLoop Main loop for this device
-func OrbLoop(km *orbweaver.KeyMaps, KeyBus chan *keyevents.KeyEvent) {
-	for i := 0; i < 26; i++ {
+func OrbLoop(km *morb.KeyMaps, KeyBus chan keyevents.KeyEvent) {
+	eventcodes = morb.BINDING[:]
+	for i := 0; i < len(eventcodes); i++ {
 		ecm[uint16(eventcodes[i])] = i
 	}
+	fmt.Println("Windows Loop Init")
 	ctx := gousb.NewContext()
 	dev, err := ctx.OpenDeviceWithVIDPID(vendor, prod)
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println("Device connected")
 	defer dev.Close()
 	conf, err := dev.Config(1)
 	if err != nil {
@@ -100,51 +122,55 @@ func OrbLoop(km *orbweaver.KeyMaps, KeyBus chan *keyevents.KeyEvent) {
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println("Windows Loop Interf")
 	defer intf.Close()
 	in, err := intf.InEndpoint(1)
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println("Windows Loop Pointed")
 	data := make([]byte, in.Desc.MaxPacketSize)
 	rs, _ := in.NewStream(in.Desc.MaxPacketSize, 3)
-	swaper := &swaps{}
-	swaper.S1 = &swapInt{}
-	swaper.S2 = &swapInt{}
+	swaper := new(swaps)
+	swaper.S1 = new(swapInt)
+	swaper.S2 = new(swapInt)
+	fmt.Println("Windows Loop Starting")
 	for {
 		_, err := rs.Read(data)
 		if err != nil {
 			panic(err)
 		}
-		for i := 2; i < in.Desc.MaxPacketSize; i++ {
-			if data[i] != 0 {
-				data[i] = hid.KEYCODE_WINDOWS_FROM_HID[data[i]]
+		addin := trans(data[0])
+		tdat := data[2:]
+		dat := append(addin, tdat...)
+		for i := 0; i < len(dat); i++ {
+			if dat[i] != 0 {
+				dat[i] = hid.KEYCODE_LINUX_FROM_HID[dat[i]]
+				dat[i] = byte(km.Maps[km.Currentmap].Keymap[ecm[uint16(dat[i])]])
+				dat[i] = hid.KEYCODE_LINUX_TO_HID[dat[i]]
+				dat[i] = hid.KEYCODE_WINDOWS_FROM_HID[dat[i]]
 			}
 		}
-		binary.Read(bytes.NewReader(data), binary.LittleEndian, swaper.S1)
-		//data[0] = trans[data[0]]
-		for i := 2; i < in.Desc.MaxPacketSize; i++ {
-			if data[i] != 0 {
-				if hid.KEYCODE_WINDOWS_FROM_HID[data[i]] != 255 {
-					if !swaper.S2.contains(data[i]) {
-						KeyEv := &keyevents.KeyEvent{}
-						KeyEv.Code = uint16(data[i])
-						KeyEv.Type = 1
-						KeyEv.Code = km.Maps[km.Currentmap].Keymap[ecm[KeyEv.Code]]
-						KeyBus <- KeyEv
-					}
-				}
+		err = binary.Read(bytes.NewReader(dat), binary.LittleEndian, swaper.S1)
+		if err != nil {
+			panic(err)
+		}
+		for _, pre := range swaper.S1.Differ(swaper.S2) {
+			if pre != 0 {
+				KeyEv := keyevents.KeyEvent{}
+				KeyEv.Code = uint16(pre)
+				KeyEv.Type = 1
+				KeyBus <- KeyEv
+			}
+		}
+		for _, rel := range swaper.S2.Differ(swaper.S1) {
+			if rel != 0 {
+				KeyEv := keyevents.KeyEvent{}
+				KeyEv.Code = uint16(rel)
+				KeyEv.Type = 2
+				KeyBus <- KeyEv
 			}
 		}
 		swaper.swap()
-		r := swaper.S2.Releases(swaper.S1)
-		for _, rel := range r {
-			KeyEv := &keyevents.KeyEvent{}
-			KeyEv.Code = uint16(rel)
-			KeyEv.Type = 2
-			KeyEv.Code = km.Maps[km.Currentmap].Keymap[ecm[KeyEv.Code]]
-			KeyBus <- KeyEv
-		}
-		//Not quite sure how to handle this data quite yet
-		println(hex.EncodeToString(data))
 	}
 }
