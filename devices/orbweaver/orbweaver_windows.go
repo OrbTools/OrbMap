@@ -144,7 +144,13 @@ func OrbLoop(km *morb.KeyMaps, KeyBus chan keyevents.KeyEvent) {
 		tdat := data[2:]
 		dat := append(addin, tdat...)
 		for i := 0; i < len(dat); i++ {
-			if dat[i] != 0 {
+			if dat[i] == 42 || dat[i] == 29 || dat[i] == 56 {
+				dat[i] = byte(km.Maps[km.Currentmap].Keymap[ecm[uint16(dat[i])]])
+				if dat[i] != 42 && dat[i] != 29 || dat[i] != 56 {
+					dat[i] = hid.KEYCODE_LINUX_TO_HID[dat[i]]
+					dat[i] = hid.KEYCODE_WINDOWS_FROM_HID[dat[i]]
+				}
+			} else if dat[i] != 0 {
 				dat[i] = hid.KEYCODE_LINUX_FROM_HID[dat[i]]
 				dat[i] = byte(km.Maps[km.Currentmap].Keymap[ecm[uint16(dat[i])]])
 				dat[i] = hid.KEYCODE_LINUX_TO_HID[dat[i]]
