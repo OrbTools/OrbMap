@@ -3,15 +3,11 @@
 package emu
 
 import (
-	"syscall"
 	"unsafe"
 
 	"github.com/OrbTools/OrbMap/interface/keyevents"
 	"github.com/lxn/win"
 )
-
-var user32 = syscall.NewLazyDLL("user32.dll")
-var mapVK = user32.NewProc("MapVirtualKeyA")
 
 func downKey(key uint16) {
 	in := []win.KEYBD_INPUT{
