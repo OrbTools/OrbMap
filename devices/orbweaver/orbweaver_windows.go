@@ -8,8 +8,8 @@ import (
 	"encoding/binary"
 	"encoding/hex"
 
-	"github.com/OrbTools/OrbCommon/devices/common"
 	"github.com/OrbTools/OrbCommon/devices/orbweaver"
+	"github.com/OrbTools/OrbCommon/hid"
 	"github.com/OrbTools/OrbMap/interface/keyevents"
 	"github.com/google/gousb"
 )
@@ -117,14 +117,14 @@ func OrbLoop(km *orbweaver.KeyMaps, KeyBus chan *keyevents.KeyEvent) {
 		}
 		for i := 2; i < in.Desc.MaxPacketSize; i++ {
 			if data[i] != 0 {
-				data[i] = common.KEYCODE_WINDOWS_FROM_HID[data[i]]
+				data[i] = hid.KEYCODE_WINDOWS_FROM_HID[data[i]]
 			}
 		}
 		binary.Read(bytes.NewReader(data), binary.LittleEndian, swaper.S1)
 		//data[0] = trans[data[0]]
 		for i := 2; i < in.Desc.MaxPacketSize; i++ {
 			if data[i] != 0 {
-				if common.KEYCODE_WINDOWS_FROM_HID[data[i]] != 255 {
+				if hid.KEYCODE_WINDOWS_FROM_HID[data[i]] != 255 {
 					if !swaper.S2.contains(data[i]) {
 						KeyEv := &keyevents.KeyEvent{}
 						KeyEv.Code = uint16(data[i])
