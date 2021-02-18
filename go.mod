@@ -7,5 +7,5 @@ require (
 	github.com/bendahl/uinput v1.4.0
 	github.com/google/gousb v1.1.1
 	github.com/lxn/win v0.0.0-20201111105847-2a20daff6a55
-	golang.org/x/sys v0.0.0-20210124154548-22da62e12c0c // indirect
+	golang.org/x/sys v0.0.0-20210217105451-b926d437f341 // indirect
 )
