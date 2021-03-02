@@ -1,6 +1,6 @@
 module github.com/OrbTools/OrbMap
 
-go 1.15
+go 1.16
 
 require (
 	github.com/OrbTools/OrbCommon v0.0.0-20210210190718-26987f35f7fe
