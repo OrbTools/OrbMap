@@ -4,5 +4,5 @@ package keyevents
 type KeyEvent struct {
 	Type  uint16
 	Code  uint16
-	Value int
+	Value int32
 }
