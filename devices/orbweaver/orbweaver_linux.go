@@ -27,9 +27,7 @@ func OrbLoop(km *morb.KeyMaps, KeyBus chan keyevents.KeyEvent) {
 	for {
 		f.Read(b)
 		KeyEv := keyevents.KeyEvent{}
-		KeyEv.Type = binary.LittleEndian.Uint16(b[16:18])
-		KeyEv.Code = km.Maps[km.Currentmap].Keymap[ecm[binary.LittleEndian.Uint16(b[18:20])]]
-		binary.Read(bytes.NewReader(b[20:]), binary.LittleEndian, &KeyEv.Value)
+		binary.Read(bytes.NewReader(b[16:]), binary.LittleEndian, &KeyEv)
 		KeyEv.Code = km.Maps[km.Currentmap].Keymap[ecm[KeyEv.Code]]
 		if KeyEv.Code != 0 && KeyEv.Type != 4 {
 			KeyBus <- KeyEv

@@ -1,5 +1,5 @@
-github.com/OrbTools/OrbCommon v0.0.0-20210210190718-26987f35f7fe h1:hypW2DMdummU8SiitR67h2pUwVpcOSfEKU8E0KZCCys=
-github.com/OrbTools/OrbCommon v0.0.0-20210210190718-26987f35f7fe/go.mod h1:ErdpS2Y/8Ik89IDNsH+yaOWo/XcKzf4riEBfPG3xK+o=
+github.com/OrbTools/OrbCommon v0.0.0-20210302052644-6a27f15862ae h1:/O7MDEwGqISFrGwnkQsezsbjgKThAY8223Y2lLi61Qs=
+github.com/OrbTools/OrbCommon v0.0.0-20210302052644-6a27f15862ae/go.mod h1:8HEhD7wF9Fqritt/jYxDmjbxEScWhFfVajdYdPO5Y14=
 github.com/bendahl/uinput v1.4.0 h1:aVJhayM1wEv7yXXLvC/fbXMmA1uB+jAspKhXQaV+76U=
 github.com/bendahl/uinput v1.4.0/go.mod h1:Np7w3DINc9wB83p12fTAM3DPPhFnAKP0WTXRqCQJ6Z8=
 github.com/google/gousb v1.1.1 h1:2sjwXlc0PIBgDnXtNxUrHcD/RRFOmAtRq4QgnFBE6xc=
@@ -7,5 +7,5 @@ github.com/google/gousb v1.1.1/go.mod h1:b3uU8itc6dHElt063KJobuVtcKHWEfFOysOqBNz
 github.com/lxn/win v0.0.0-20210218163916-a377121e959e h1:H+t6A/QJMbhCSEH5rAuRxh+CtW96g0Or0Fxa9IKr4uc=
 github.com/lxn/win v0.0.0-20210218163916-a377121e959e/go.mod h1:KxxjdtRkfNoYDCUP5ryK7XJJNTnpC8atvtmTheChOtk=
 golang.org/x/sys v0.0.0-20201018230417-eeed37f84f13/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
-golang.org/x/sys v0.0.0-20210301091718-77cc2087c03b h1:kHlr0tATeLRMEiZJu5CknOw/E8V6h69sXXQFGoPtjcc=
-golang.org/x/sys v0.0.0-20210301091718-77cc2087c03b/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/sys v0.0.0-20210303074136-134d130e1a04 h1:cEhElsAv9LUt9ZUUocxzWe05oFLVd+AA2nstydTeI8g=
+golang.org/x/sys v0.0.0-20210303074136-134d130e1a04/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
