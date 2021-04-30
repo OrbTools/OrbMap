@@ -6,13 +6,13 @@ import (
 
 	"github.com/OrbTools/OrbMap/devices/orbweaver"
 	"github.com/OrbTools/OrbMap/emu"
-	"github.com/OrbTools/OrbMap/interface/keyevents"
+	evdev "github.com/gvalkov/golang-evdev"
 )
 
 func main() {
 	orbs := flag.String("orbweaver", "", "Comma seperated string of orbs for the orbweaver")
 	flag.Parse()
-	KeyBus := make(chan keyevents.KeyEvent, 128)
+	KeyBus := make(chan *evdev.InputEvent, 128)
 	Maps := orbweaver.ProcOrbFiles(*orbs)
 	go orbweaver.OrbLoop(Maps, KeyBus)
 	emu.ProcKey(KeyBus)

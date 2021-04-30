@@ -5,28 +5,26 @@ package orbweaver
 import (
 	"bytes"
 	"encoding/binary"
-	"os"
 
 	morb "github.com/OrbTools/OrbCommon/devices/orbweaver"
-	"github.com/OrbTools/OrbMap/interface/keyevents"
+	evdev "github.com/gvalkov/golang-evdev"
 )
 
 //OrbLoop Main loop for this device
-func OrbLoop(km *morb.KeyMaps, KeyBus chan keyevents.KeyEvent) {
+func OrbLoop(km *morb.KeyMaps, KeyBus chan *evdev.InputEvent) {
 	eventcodes = morb.BINDING[:]
 	for i := 0; i < len(eventcodes); i++ {
 		ecm[uint16(eventcodes[i])] = i
 	}
 	println("UnixLoop starting")
-	f, err := os.Open("/dev/input/by-id/usb-Razer_Razer_Orbweaver_Chroma-event-kbd")
+	f, err := evdev.Open("/dev/input/by-id/usb-Razer_Razer_Orbweaver_Chroma-event-kbd")
 	if err != nil {
 		panic(err)
 	}
-	defer f.Close()
+	f.Grab()
 	b := make([]byte, 24)
 	for {
-		f.Read(b)
-		KeyEv := keyevents.KeyEvent{}
+		KeyEv, _ := f.ReadOne()
 		binary.Read(bytes.NewReader(b[16:]), binary.LittleEndian, &KeyEv)
 		KeyEv.Code = km.Maps[km.Currentmap].Keymap[ecm[KeyEv.Code]]
 		if KeyEv.Code != 0 && KeyEv.Type != 4 {
