@@ -5,7 +5,7 @@ package emu
 import (
 	"unsafe"
 
-	evdev "github.com/gvalkov/golang-evdev"
+	"github.com/OrbTools/OrbMap/keyevents"
 	"github.com/lxn/win"
 )
 
@@ -39,7 +39,7 @@ func upKey(key uint16) {
 }
 
 //ProcKey Windows support is so weird
-func ProcKey(kb chan *evdev.InputEvent) {
+func ProcKey(kb chan *keyevents.KeyEvent) {
 	println("Emu Windows Starting")
 	for {
 		KeyEv := <-kb

@@ -9,8 +9,8 @@ import (
 
 	morb "github.com/OrbTools/OrbCommon/devices/orbweaver"
 	"github.com/OrbTools/OrbCommon/hid"
+	"github.com/OrbTools/OrbMap/keyevents"
 	"github.com/google/gousb"
-	evdev "github.com/gvalkov/golang-evdev"
 )
 
 const (
@@ -101,7 +101,7 @@ func (s *swapInt) Differ(s2 *swapInt) []byte {
 }
 
 //OrbLoop Main loop for this device
-func OrbLoop(km *morb.KeyMaps, KeyBus chan *evdev.InputEvent) {
+func OrbLoop(km *morb.KeyMaps, KeyBus chan *keyevents.KeyEvent) {
 	eventcodes = morb.BINDING[:]
 	for i := 0; i < len(eventcodes); i++ {
 		ecm[uint16(eventcodes[i])] = i
@@ -163,7 +163,7 @@ func OrbLoop(km *morb.KeyMaps, KeyBus chan *evdev.InputEvent) {
 		}
 		for _, pre := range swaper.S1.Differ(swaper.S2) {
 			if pre != 0 {
-				KeyEv := &evdev.InputEvent{}
+				KeyEv := &keyevents.KeyEvent{}
 				KeyEv.Code = uint16(pre)
 				KeyEv.Type = 1
 				KeyBus <- KeyEv
@@ -171,7 +171,7 @@ func OrbLoop(km *morb.KeyMaps, KeyBus chan *evdev.InputEvent) {
 		}
 		for _, rel := range swaper.S2.Differ(swaper.S1) {
 			if rel != 0 {
-				KeyEv := &evdev.InputEvent{}
+				KeyEv := &keyevents.KeyEvent{}
 				KeyEv.Code = uint16(rel)
 				KeyEv.Type = 2
 				KeyBus <- KeyEv
