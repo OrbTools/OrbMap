@@ -29,7 +29,6 @@ type swaps struct {
 type swapInt struct {
 	M1 byte
 	M2 byte
-	M3 byte
 	K1 byte
 	K2 byte
 	K3 byte
@@ -39,7 +38,7 @@ type swapInt struct {
 }
 
 func (s *swapInt) contains(k byte) bool {
-	return (s.K1 == k || s.K2 == k || s.K3 == k || s.K4 == k || s.K5 == k || s.K6 == k || s.M1 == k || s.M2 == k || s.M3 == k)
+	return (s.K1 == k || s.K2 == k || s.K3 == k || s.K4 == k || s.K5 == k || s.K6 == k || s.M1 == k || s.M2 == k)
 }
 
 func (s *swaps) swap() {
@@ -75,9 +74,6 @@ func (s *swapInt) Differ(s2 *swapInt) []byte {
 	}
 	if !s2.contains(s.M2) {
 		r = append(r, s.M2)
-	}
-	if !s2.contains(s.M3) {
-		r = append(r, s.M3)
 	}
 	if !s2.contains(s.K1) {
 		r = append(r, s.K1)
@@ -144,17 +140,17 @@ func OrbLoop(km *morb.KeyMaps, KeyBus chan *keyevents.KeyEvent) {
 		tdat := data[2:]
 		dat := append(addin, tdat...)
 		for i := 0; i < len(dat); i++ {
-			if i < 3 && (dat[i] == 42 || dat[i] == 29 || dat[i] == 56) {
+			if i < 2 && (dat[i] == 42 || dat[i] == 29 || dat[i] == 56) {
 				dat[i] = byte(km.Maps[km.Currentmap].Keymap[ecm[uint16(dat[i])]])
 				if dat[i] != 42 && dat[i] != 29 || dat[i] != 56 {
-					dat[i] = hid.KEYCODE_LINUX_TO_HID[dat[i]]
-					dat[i] = hid.KEYCODE_WINDOWS_FROM_HID[dat[i]]
+					dat[i] = byte(hid.GetHidFromLinux(uint16(dat[i])))
+					dat[i] = byte(hid.GetWindowsFromHid(uint16(dat[i])))
 				}
 			} else if dat[i] != 0 {
-				dat[i] = hid.KEYCODE_LINUX_FROM_HID[dat[i]]
+				dat[i] = byte(hid.GetLinuxFromHid(uint16(dat[i])))
 				dat[i] = byte(km.Maps[km.Currentmap].Keymap[ecm[uint16(dat[i])]])
-				dat[i] = hid.KEYCODE_LINUX_TO_HID[dat[i]]
-				dat[i] = hid.KEYCODE_WINDOWS_FROM_HID[dat[i]]
+				dat[i] = byte(hid.GetHidFromLinux(uint16(dat[i])))
+				dat[i] = byte(hid.GetWindowsFromHid(uint16(dat[i])))
 			}
 		}
 		err = binary.Read(bytes.NewReader(dat), binary.LittleEndian, swaper.S1)
