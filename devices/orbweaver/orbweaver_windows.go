@@ -51,17 +51,17 @@ func (s *swaps) swap() {
 func trans(M byte) []byte {
 	r := make([]byte, 0)
 	if (M & leftShift) != 0 {
-		r = append(r, byte(hid.GetMappingFromName("SHIFT_LEFT").Evdev))
+		r = append(r, byte(hid.GetMappingFromName("SHIFT_LEFT").Usb))
 	} else {
 		r = append(r, 0)
 	}
 	if (M & leftControl) != 0 {
-		r = append(r, byte(hid.GetMappingFromName("CONTROL_LEFT").Evdev))
+		r = append(r, byte(hid.GetMappingFromName("CONTROL_LEFT").Usb))
 	} else {
 		r = append(r, 0)
 	}
 	if (M & leftAlt) != 0 {
-		r = append(r, byte(hid.GetMappingFromName("SHIFT_ALT").Evdev))
+		r = append(r, byte(hid.GetMappingFromName("ALT_LEFT").Usb))
 	} else {
 		r = append(r, 0)
 	}
