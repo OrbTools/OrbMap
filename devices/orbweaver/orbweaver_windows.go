@@ -27,18 +27,19 @@ type swaps struct {
 }
 
 type swapInt struct {
-	M1 byte
-	M2 byte
 	K1 byte
 	K2 byte
 	K3 byte
 	K4 byte
 	K5 byte
 	K6 byte
+	K7 byte
+	K8 byte
+	K9 byte
 }
 
 func (s *swapInt) contains(k byte) bool {
-	return (s.K1 == k || s.K2 == k || s.K3 == k || s.K4 == k || s.K5 == k || s.K6 == k || s.M1 == k || s.M2 == k)
+	return (s.K1 == k || s.K2 == k || s.K3 == k || s.K4 == k || s.K5 == k || s.K6 == k || s.K7 == k || s.K8 == k || s.K9 == k)
 }
 
 func (s *swaps) swap() {
@@ -50,17 +51,17 @@ func (s *swaps) swap() {
 func trans(M byte) []byte {
 	r := make([]byte, 0)
 	if (M & leftShift) != 0 {
-		r = append(r, 42)
+		r = append(r, byte(hid.GetMappingFromName("SHIFT_LEFT").Evdev))
 	} else {
 		r = append(r, 0)
 	}
 	if (M & leftControl) != 0 {
-		r = append(r, 29)
+		r = append(r, byte(hid.GetMappingFromName("CONTROL_LEFT").Evdev))
 	} else {
 		r = append(r, 0)
 	}
 	if (M & leftAlt) != 0 {
-		r = append(r, 56)
+		r = append(r, byte(hid.GetMappingFromName("SHIFT_ALT").Evdev))
 	} else {
 		r = append(r, 0)
 	}
@@ -69,12 +70,6 @@ func trans(M byte) []byte {
 
 func (s *swapInt) Differ(s2 *swapInt) []byte {
 	r := make([]byte, 0)
-	if !s2.contains(s.M1) {
-		r = append(r, s.M1)
-	}
-	if !s2.contains(s.M2) {
-		r = append(r, s.M2)
-	}
 	if !s2.contains(s.K1) {
 		r = append(r, s.K1)
 	}
@@ -92,6 +87,15 @@ func (s *swapInt) Differ(s2 *swapInt) []byte {
 	}
 	if !s2.contains(s.K6) {
 		r = append(r, s.K6)
+	}
+	if !s2.contains(s.K7) {
+		r = append(r, s.K7)
+	}
+	if !s2.contains(s.K8) {
+		r = append(r, s.K8)
+	}
+	if !s2.contains(s.K9) {
+		r = append(r, s.K9)
 	}
 	return r
 }
@@ -140,13 +144,7 @@ func OrbLoop(km *morb.KeyMaps, KeyBus chan *keyevents.KeyEvent) {
 		tdat := data[2:]
 		dat := append(addin, tdat...)
 		for i := 0; i < len(dat); i++ {
-			if i < 2 && (dat[i] == 42 || dat[i] == 29 || dat[i] == 56) {
-				dat[i] = byte(km.Maps[km.Currentmap].Keymap[ecm[uint16(dat[i])]])
-				if dat[i] != 42 && dat[i] != 29 || dat[i] != 56 {
-					dat[i] = byte(hid.GetHidFromLinux(uint16(dat[i])))
-					dat[i] = byte(hid.GetWindowsFromHid(uint16(dat[i])))
-				}
-			} else if dat[i] != 0 {
+			if dat[i] != 0 {
 				dat[i] = byte(hid.GetLinuxFromHid(uint16(dat[i])))
 				dat[i] = byte(km.Maps[km.Currentmap].Keymap[ecm[uint16(dat[i])]])
 				dat[i] = byte(hid.GetHidFromLinux(uint16(dat[i])))
