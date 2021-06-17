@@ -1,5 +1,5 @@
-github.com/OrbTools/OrbCommon v0.0.0-20210512020311-0896f3a8de6f h1:26ndpRVB/Z+1tPGzYcRVwQ9m2V+d9K9o9y2ioNkJBdg=
-github.com/OrbTools/OrbCommon v0.0.0-20210512020311-0896f3a8de6f/go.mod h1:8HEhD7wF9Fqritt/jYxDmjbxEScWhFfVajdYdPO5Y14=
+github.com/OrbTools/OrbCommon v0.0.0-20210604213605-2c1ec68f6f91 h1:zsCP3Xou+cciiCjs/hTT5Ecr9WT1X0mIsfX4MR0nYW8=
+github.com/OrbTools/OrbCommon v0.0.0-20210604213605-2c1ec68f6f91/go.mod h1:8HEhD7wF9Fqritt/jYxDmjbxEScWhFfVajdYdPO5Y14=
 github.com/bendahl/uinput v1.4.1 h1:ecxSLcVxWk0EFyZBtmCTnOKjK/HCNdsUcWXRTkNt06k=
 github.com/bendahl/uinput v1.4.1/go.mod h1:Np7w3DINc9wB83p12fTAM3DPPhFnAKP0WTXRqCQJ6Z8=
 github.com/google/gousb v1.1.1 h1:2sjwXlc0PIBgDnXtNxUrHcD/RRFOmAtRq4QgnFBE6xc=
@@ -9,5 +9,5 @@ github.com/gvalkov/golang-evdev v0.0.0-20191114124502-287e62b94bcb/go.mod h1:SAz
 github.com/lxn/win v0.0.0-20210218163916-a377121e959e h1:H+t6A/QJMbhCSEH5rAuRxh+CtW96g0Or0Fxa9IKr4uc=
 github.com/lxn/win v0.0.0-20210218163916-a377121e959e/go.mod h1:KxxjdtRkfNoYDCUP5ryK7XJJNTnpC8atvtmTheChOtk=
 golang.org/x/sys v0.0.0-20201018230417-eeed37f84f13/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
-golang.org/x/sys v0.0.0-20210511113859-b0526f3d8744 h1:yhBbb4IRs2HS9PPlAg6DMC6mUOKexJBNsLf4Z+6En1Q=
-golang.org/x/sys v0.0.0-20210511113859-b0526f3d8744/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+golang.org/x/sys v0.0.0-20210616094352-59db8d763f22 h1:RqytpXGR1iVNX7psjB3ff8y7sNFinVFvkx1c8SjBkio=
+golang.org/x/sys v0.0.0-20210616094352-59db8d763f22/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
