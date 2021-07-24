@@ -100,7 +100,7 @@ func (s *swapInt) Differ(s2 *swapInt) []byte {
 }
 
 //OrbLoop Main loop for this device
-func (p Orbweaver) OrbLoop(KeyBus chan *keyevents.KeyEvent) {
+func (p *Orbweaver) OrbLoop(KeyBus chan *keyevents.KeyEvent) {
 	fmt.Println("Windows Loop Init")
 	ctx := gousb.NewContext()
 	dev, err := ctx.OpenDeviceWithVIDPID(vendor, prod)

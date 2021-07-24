@@ -15,7 +15,7 @@ type Orbweaver struct {
 }
 
 //ProbcOrbFiles processes orbs
-func (p Orbweaver) ProcOrbs(orbs []string) {
+func (p *Orbweaver) ProcOrbs(orbs []string) {
 	p.keymaps = &morb.KeyMaps{Currentmap: 0}
 	if len(orbs) > 0 {
 		for idx, orb := range orbs {
