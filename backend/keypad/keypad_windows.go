@@ -1,6 +1,6 @@
 // +build windows
 
-package orbweaver
+package keypad
 
 import (
 	"bytes"
@@ -13,8 +13,6 @@ import (
 )
 
 const (
-	vendor           = gousb.ID(0x1532)
-	prod             = gousb.ID(0x0207)
 	leftControl byte = 0x1
 	leftShift   byte = 0x2
 	leftAlt     byte = 0x4
@@ -100,10 +98,10 @@ func (s *swapInt) Differ(s2 *swapInt) []byte {
 }
 
 //OrbLoop Main loop for this device
-func (p *Orbweaver) OrbLoop(KeyBus chan *keyevents.KeyEvent) {
+func (p *Keypad) OrbLoop(KeyBus chan *keyevents.KeyEvent) {
 	fmt.Println("Windows Loop Init")
 	ctx := gousb.NewContext()
-	dev, err := ctx.OpenDeviceWithVIDPID(vendor, prod)
+	dev, err := ctx.OpenDeviceWithVIDPID(gousb.ID(p.definition.Device.VendorID), gousb.ID(p.definition.Device.ProdID))
 	if err != nil {
 		panic(err)
 	}
