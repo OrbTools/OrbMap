@@ -7,7 +7,6 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	morb "github.com/OrbTools/OrbCommon/devices/orbweaver"
 	"github.com/OrbTools/OrbCommon/hid"
 	"github.com/OrbTools/OrbMap/keyevents"
 	"github.com/google/gousb"
@@ -141,10 +140,9 @@ func (p Orbweaver) OrbLoop(KeyBus chan *keyevents.KeyEvent) {
 		dat := append(addin, tdat...)
 		for i := 0; i < len(dat); i++ {
 			if dat[i] != 0 {
-				dat[i] = byte(hid.GetLinuxFromHid(uint16(dat[i])))
+				dat[i] = byte(hid.GetMappingFromHID(uint16(dat[i])).Evdev)
 				dat[i] = byte(p.keymaps.Maps[p.keymaps.Currentmap].Keymap[p.ecm[uint16(dat[i])]])
-				dat[i] = byte(hid.GetHidFromLinux(uint16(dat[i])))
-				dat[i] = byte(hid.GetWindowsFromHid(uint16(dat[i])))
+				dat[i] = byte(hid.GetMappingFromLinux(uint16(dat[i])).Win)
 			}
 		}
 		err = binary.Read(bytes.NewReader(dat), binary.LittleEndian, swaper.S1)
