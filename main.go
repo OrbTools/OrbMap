@@ -3,17 +3,26 @@ package main
 
 import (
 	"flag"
+	"strings"
 
-	"github.com/OrbTools/OrbMap/devices/orbweaver"
 	"github.com/OrbTools/OrbMap/emu"
 	"github.com/OrbTools/OrbMap/keyevents"
+	"github.com/OrbTools/OrbMap/registry"
 )
 
+//go:generate go run generators/devices.go
 func main() {
-	orbs := flag.String("orbweaver", "", "Comma seperated string of orbs for the orbweaver")
+	str := make(map[string]*string)
+	for d := range registry.Systems {
+		str[d] = flag.String(d, "", "Comma seperated list of orb files for "+d)
+	}
 	flag.Parse()
 	KeyBus := make(chan *keyevents.KeyEvent, 128)
-	Maps := orbweaver.ProcOrbFiles(*orbs)
-	go orbweaver.OrbLoop(Maps, KeyBus)
+	for sys, orbs := range str {
+		if len(*orbs) > 0 {
+			registry.Systems[sys].ProcOrbs(strings.Split(*orbs, ","))
+			go registry.Systems[sys].OrbLoop(KeyBus)
+		}
+	}
 	emu.ProcKey(KeyBus)
 }

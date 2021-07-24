@@ -101,11 +101,7 @@ func (s *swapInt) Differ(s2 *swapInt) []byte {
 }
 
 //OrbLoop Main loop for this device
-func OrbLoop(km *morb.KeyMaps, KeyBus chan *keyevents.KeyEvent) {
-	eventcodes = morb.BINDING[:]
-	for i := 0; i < len(eventcodes); i++ {
-		ecm[uint16(eventcodes[i])] = i
-	}
+func (p Orbweaver) OrbLoop(KeyBus chan *keyevents.KeyEvent) {
 	fmt.Println("Windows Loop Init")
 	ctx := gousb.NewContext()
 	dev, err := ctx.OpenDeviceWithVIDPID(vendor, prod)
@@ -146,7 +142,7 @@ func OrbLoop(km *morb.KeyMaps, KeyBus chan *keyevents.KeyEvent) {
 		for i := 0; i < len(dat); i++ {
 			if dat[i] != 0 {
 				dat[i] = byte(hid.GetLinuxFromHid(uint16(dat[i])))
-				dat[i] = byte(km.Maps[km.Currentmap].Keymap[ecm[uint16(dat[i])]])
+				dat[i] = byte(p.keymaps.Maps[p.keymaps.Currentmap].Keymap[p.ecm[uint16(dat[i])]])
 				dat[i] = byte(hid.GetHidFromLinux(uint16(dat[i])))
 				dat[i] = byte(hid.GetWindowsFromHid(uint16(dat[i])))
 			}
