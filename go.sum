@@ -1,5 +1,5 @@
-github.com/OrbTools/OrbCommon v0.0.0-20210724065833-4ff2abe0a12c h1:oTZtQVfLPB3ef+m8NVY8pnvAZgrvMRyr6u21HdkRa9I=
-github.com/OrbTools/OrbCommon v0.0.0-20210724065833-4ff2abe0a12c/go.mod h1:8HEhD7wF9Fqritt/jYxDmjbxEScWhFfVajdYdPO5Y14=
+github.com/OrbTools/OrbCommon v0.0.0-20210724194347-38cc36047c7d h1:v3tlCft2Rbg3Fojm+bKWnkMjmABiMhGeL+wVAcSTp8Q=
+github.com/OrbTools/OrbCommon v0.0.0-20210724194347-38cc36047c7d/go.mod h1:8HEhD7wF9Fqritt/jYxDmjbxEScWhFfVajdYdPO5Y14=
 github.com/bendahl/uinput v1.4.1 h1:ecxSLcVxWk0EFyZBtmCTnOKjK/HCNdsUcWXRTkNt06k=
 github.com/bendahl/uinput v1.4.1/go.mod h1:Np7w3DINc9wB83p12fTAM3DPPhFnAKP0WTXRqCQJ6Z8=
 github.com/google/gousb v1.1.1 h1:2sjwXlc0PIBgDnXtNxUrHcD/RRFOmAtRq4QgnFBE6xc=

@@ -1,5 +1,5 @@
 package main
 
 import (
-	_ "github.com/OrbTools/OrbMap/devices/orbweaver"
+	_ "github.com/OrbTools/OrbMap/backend/keypad"
 )
