@@ -2,6 +2,7 @@ package keypad
 
 import (
 	"fmt"
+	"os"
 	"path/filepath"
 
 	"github.com/OrbTools/OrbCommon/devices"
@@ -23,7 +24,9 @@ func (p *Keypad) ProcOrbs(dev *devices.DeviceDef, orbs []string) {
 		for _, orb := range orbs {
 			abs, _ := filepath.Abs(orb)
 			fmt.Println("Loading Orb " + abs)
-			KMap := devices.LoadKeymap(abs, dev)
+			file, _ := os.Open(abs)
+			KMap := devices.LoadKeymap(file, dev)
+			file.Close()
 			p.keymaps.Maps = append(p.keymaps.Maps, KMap)
 		}
 		p.keymaps.MCount = len(orbs)
