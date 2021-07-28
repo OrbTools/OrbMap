@@ -9,6 +9,7 @@ import (
 	"flag"
 	"io"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/OrbTools/OrbCommon/devices"
@@ -24,7 +25,7 @@ func loadOrb(file string, dev *devices.DeviceDef) *devices.KeyMap {
 	binary.Read(of, binary.LittleEndian, mapped.Color)
 	return mapped
 }
-func writeXorb(mapped interface{}, file io.WriteCloser) {
+func writeXorb(file io.WriteCloser, mapped interface{}) {
 	xdr.Marshal(file, mapped)
 	file.Close()
 }
@@ -32,7 +33,8 @@ func main() {
 	devt := flag.String("dev", "", "Device type to convert")
 	inorb := flag.String("orb", "", "orb file to convert to xorb")
 	flag.Parse()
+	path, _ := filepath.Abs(*inorb)
 	km := loadOrb(*inorb, devices.DeviceTypes[*devt])
-	file, _ := os.Create(strings.Split(*inorb, ".")[0] + ".xorb")
-	writeXorb(km, file)
+	file, _ := os.Create(strings.Split(path, ".")[0] + ".xorb")
+	writeXorb(file, km)
 }

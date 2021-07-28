@@ -1,4 +1,5 @@
-// +build linux !windows
+// +build !windows
+
 package keypad
 
 import (
