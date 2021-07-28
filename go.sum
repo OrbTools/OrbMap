@@ -1,7 +1,9 @@
-github.com/OrbTools/OrbCommon v0.0.0-20210724194347-38cc36047c7d h1:v3tlCft2Rbg3Fojm+bKWnkMjmABiMhGeL+wVAcSTp8Q=
-github.com/OrbTools/OrbCommon v0.0.0-20210724194347-38cc36047c7d/go.mod h1:8HEhD7wF9Fqritt/jYxDmjbxEScWhFfVajdYdPO5Y14=
+github.com/OrbTools/OrbCommon v0.0.0-20210728062337-7715bc122c84 h1:oyuSV4rYnHlM4jy4xKiQpKvPetR7Nx9IXm92a32uI5k=
+github.com/OrbTools/OrbCommon v0.0.0-20210728062337-7715bc122c84/go.mod h1:LhYZl/HJpFZqHa/3CD/nxsXAZtMeVRinztSngSFMCDM=
 github.com/bendahl/uinput v1.4.1 h1:ecxSLcVxWk0EFyZBtmCTnOKjK/HCNdsUcWXRTkNt06k=
 github.com/bendahl/uinput v1.4.1/go.mod h1:Np7w3DINc9wB83p12fTAM3DPPhFnAKP0WTXRqCQJ6Z8=
+github.com/davecgh/go-xdr v0.0.0-20161123171359-e6a2ba005892 h1:qg9VbHo1TlL0KDM0vYvBG9EY0X0Yku5WYIPoFWt8f6o=
+github.com/davecgh/go-xdr v0.0.0-20161123171359-e6a2ba005892/go.mod h1:CTDl0pzVzE5DEzZhPfvhY/9sPFMQIxaJ9VAMs9AagrE=
 github.com/google/gousb v1.1.1 h1:2sjwXlc0PIBgDnXtNxUrHcD/RRFOmAtRq4QgnFBE6xc=
 github.com/google/gousb v1.1.1/go.mod h1:b3uU8itc6dHElt063KJobuVtcKHWEfFOysOqBNzHhLY=
 github.com/gvalkov/golang-evdev v0.0.0-20191114124502-287e62b94bcb h1:WHSAxLz3P5t4DKukfJ5wu7+aMyVkuTNSbCiAjVS92sM=
