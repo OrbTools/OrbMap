@@ -1,21 +1,18 @@
 // +build windows
 
-package orbweaver
+package keypad
 
 import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
 
-	morb "github.com/OrbTools/OrbCommon/devices/orbweaver"
 	"github.com/OrbTools/OrbCommon/hid"
 	"github.com/OrbTools/OrbMap/keyevents"
 	"github.com/google/gousb"
 )
 
 const (
-	vendor           = gousb.ID(0x1532)
-	prod             = gousb.ID(0x0207)
 	leftControl byte = 0x1
 	leftShift   byte = 0x2
 	leftAlt     byte = 0x4
@@ -101,14 +98,10 @@ func (s *swapInt) Differ(s2 *swapInt) []byte {
 }
 
 //OrbLoop Main loop for this device
-func OrbLoop(km *morb.KeyMaps, KeyBus chan *keyevents.KeyEvent) {
-	eventcodes = morb.BINDING[:]
-	for i := 0; i < len(eventcodes); i++ {
-		ecm[uint16(eventcodes[i])] = i
-	}
+func (p *Keypad) OrbLoop(KeyBus chan *keyevents.KeyEvent) {
 	fmt.Println("Windows Loop Init")
 	ctx := gousb.NewContext()
-	dev, err := ctx.OpenDeviceWithVIDPID(vendor, prod)
+	dev, err := ctx.OpenDeviceWithVIDPID(gousb.ID(p.definition.Device.VendorID), gousb.ID(p.definition.Device.ProdID))
 	if err != nil {
 		panic(err)
 	}
@@ -145,10 +138,9 @@ func OrbLoop(km *morb.KeyMaps, KeyBus chan *keyevents.KeyEvent) {
 		dat := append(addin, tdat...)
 		for i := 0; i < len(dat); i++ {
 			if dat[i] != 0 {
-				dat[i] = byte(hid.GetLinuxFromHid(uint16(dat[i])))
-				dat[i] = byte(km.Maps[km.Currentmap].Keymap[ecm[uint16(dat[i])]])
-				dat[i] = byte(hid.GetHidFromLinux(uint16(dat[i])))
-				dat[i] = byte(hid.GetWindowsFromHid(uint16(dat[i])))
+				dat[i] = byte(hid.GetMappingFromHID(uint16(dat[i])).Evdev)
+				dat[i] = byte(p.keymaps.Maps[p.keymaps.Currentmap].Keymap[p.ecm[uint16(dat[i])]])
+				dat[i] = byte(hid.GetMappingFromLinux(uint16(dat[i])).Win)
 			}
 		}
 		err = binary.Read(bytes.NewReader(dat), binary.LittleEndian, swaper.S1)
