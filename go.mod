@@ -1,9 +1,11 @@
 module github.com/OrbTools/OrbMap
 
 go 1.16
+
 require (
-	github.com/OrbTools/OrbCommon v0.0.0-20210728062337-7715bc122c84
+	github.com/OrbTools/OrbCommon v0.0.0-20210728064103-00fcb730cbf9
 	github.com/bendahl/uinput v1.4.1
+	github.com/davecgh/go-xdr v0.0.0-20161123171359-e6a2ba005892
 	github.com/google/gousb v1.1.1
 	github.com/gvalkov/golang-evdev v0.0.0-20191114124502-287e62b94bcb
 	github.com/lxn/win v0.0.0-20210218163916-a377121e959e
