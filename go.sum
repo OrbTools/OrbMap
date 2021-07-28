@@ -1,7 +1,5 @@
-github.com/OrbTools/OrbCommon v0.0.0-20210728121911-2b9161a8742c h1:wvtd18WR162mMkyECuHXfN9oU06ng4xitj28WE8TmLI=
-github.com/OrbTools/OrbCommon v0.0.0-20210728121911-2b9161a8742c/go.mod h1:LhYZl/HJpFZqHa/3CD/nxsXAZtMeVRinztSngSFMCDM=
-github.com/OrbTools/OrbCommon v0.0.0-20210728124319-ce853a74ab0d h1:zi7bF3t4Hr1pOvPICE+Eq+mNAvOszR1Mc1XVfmRwUCo=
-github.com/OrbTools/OrbCommon v0.0.0-20210728124319-ce853a74ab0d/go.mod h1:QpmZXfsa8ixOQkr29N9sD38PJuV9eYw3b1xTazot6PA=
+github.com/OrbTools/OrbCommon v0.0.0-20210728131206-05d3f456f3f8 h1:KWuVPAkREE71HFBRRqReCJMlJVfOmnkcO31/41wm7j4=
+github.com/OrbTools/OrbCommon v0.0.0-20210728131206-05d3f456f3f8/go.mod h1:QpmZXfsa8ixOQkr29N9sD38PJuV9eYw3b1xTazot6PA=
 github.com/bendahl/uinput v1.4.1 h1:ecxSLcVxWk0EFyZBtmCTnOKjK/HCNdsUcWXRTkNt06k=
 github.com/bendahl/uinput v1.4.1/go.mod h1:Np7w3DINc9wB83p12fTAM3DPPhFnAKP0WTXRqCQJ6Z8=
 github.com/davecgh/go-xdr v0.0.0-20161123171359-e6a2ba005892 h1:qg9VbHo1TlL0KDM0vYvBG9EY0X0Yku5WYIPoFWt8f6o=
