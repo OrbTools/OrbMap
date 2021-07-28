@@ -26,7 +26,6 @@ func (p *Keypad) ProcOrbs(dev *devices.DeviceDef, orbs []string) {
 			fmt.Println("Loading Orb " + abs)
 			file, _ := os.Open(abs)
 			KMap := devices.LoadKeymap(file, dev)
-			file.Close()
 			p.keymaps.Maps = append(p.keymaps.Maps, KMap)
 		}
 		p.keymaps.MCount = len(orbs)
