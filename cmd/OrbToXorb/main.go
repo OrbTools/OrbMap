@@ -12,8 +12,8 @@ import (
 	"path/filepath"
 	"strings"
 
+	xdr "github.com/Minizbot2012/minxdr"
 	"github.com/OrbTools/OrbCommon/devices"
-	xdr "github.com/minizbot2012/minxdr"
 )
 
 func loadOrb(file string, dev *devices.DeviceDef) *devices.KeyMap {
