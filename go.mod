@@ -3,7 +3,7 @@ module github.com/OrbTools/OrbMap
 go 1.17
 
 require (
-	github.com/OrbTools/OrbCommon v0.0.0-20220202055136-5d11e7ec765c
+	github.com/OrbTools/OrbCommon v0.0.0-20220202061304-a7fbba49e063
 	github.com/bendahl/uinput v1.5.0
 	github.com/google/gousb v1.1.1
 	github.com/gvalkov/golang-evdev v0.0.0-20191114124502-287e62b94bcb
