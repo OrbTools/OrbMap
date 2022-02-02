@@ -3,7 +3,7 @@ package registry
 import (
 	"reflect"
 
-	"github.com/OrbTools/OrbCommon/devices"
+	"github.com/OrbTools/OrbCommon/devices/structs"
 	"github.com/OrbTools/OrbMap/keyevents"
 )
 
@@ -13,7 +13,7 @@ var (
 
 type Device interface {
 	OrbLoop(chan *keyevents.KeyEvent)
-	ProcOrbs(*devices.DeviceDef, []string)
+	ProcOrbs(*structs.DeviceDef, []string)
 }
 
 func init() {

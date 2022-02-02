@@ -6,26 +6,27 @@ import (
 	"path/filepath"
 
 	"github.com/OrbTools/OrbCommon/devices"
+	"github.com/OrbTools/OrbCommon/devices/structs"
 	"github.com/OrbTools/OrbMap/registry"
 )
 
 type Keypad struct {
 	eventcodes []byte
 	ecm        map[uint16]int
-	keymaps    *devices.KeyMaps
-	definition *devices.DeviceDef
+	keymaps    *structs.KeyMaps
+	definition *structs.DeviceDef
 }
 
 //ProbcOrbFiles processes orbs
-func (p *Keypad) ProcOrbs(dev *devices.DeviceDef, orbs []string) {
+func (p *Keypad) ProcOrbs(dev *structs.DeviceDef, orbs []string) {
 	p.definition = dev
-	p.keymaps = &devices.KeyMaps{Currentmap: 0}
+	p.keymaps = &structs.KeyMaps{Currentmap: 0}
 	if len(orbs) > 0 {
 		for _, orb := range orbs {
 			abs, _ := filepath.Abs(orb)
 			fmt.Println("Loading Orb " + abs)
 			file, _ := os.Open(abs)
-			KMap := devices.LoadKeymap(file, dev)
+			KMap := devices.LoadKeymap(file)
 			p.keymaps.Maps = append(p.keymaps.Maps, KMap)
 		}
 		p.keymaps.MCount = len(orbs)
