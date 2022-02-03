@@ -1,4 +1,5 @@
-//generate:boxy
+//go:generate go run generators/backends.go
+
 package main
 
 import (
@@ -11,7 +12,6 @@ import (
 	"github.com/OrbTools/OrbMap/registry"
 )
 
-//go:generate go run generators/backends.go
 func main() {
 	str := make(map[string]*string)
 	for d, dev := range devices.DeviceTypes {
