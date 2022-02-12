@@ -1,10 +1,9 @@
-github.com/Minizbot2012/minxdr v0.0.0-20211128051657-16f8bd94f749/go.mod h1:Qtnd0s9q5lVY7qtAGJPYVsRsfNLsIMVhxYqm01ohZJk=
-github.com/Minizbot2012/minxdr v0.0.0-20220202052052-41040d8d2a6a h1:JHts7vzHcrHjoJ/OLh+QORXlOazmxjjWVknBTWVtPdI=
-github.com/Minizbot2012/minxdr v0.0.0-20220202052052-41040d8d2a6a/go.mod h1:Qtnd0s9q5lVY7qtAGJPYVsRsfNLsIMVhxYqm01ohZJk=
-github.com/OrbTools/OrbCommon v0.0.0-20220202061304-a7fbba49e063 h1:yeaisxmunKWM9ungs6IaXeZwBPz3k8hfnZCt3jXTxwY=
-github.com/OrbTools/OrbCommon v0.0.0-20220202061304-a7fbba49e063/go.mod h1:ZN/0kkPoCthJetQBrFvrVgt42HnrN8RRZ2U2wrptcio=
-github.com/bendahl/uinput v1.5.0 h1:W+QLck2vvOQeo8McsZzPgFJZEg8KP4IIYOB3mbVvTWY=
-github.com/bendahl/uinput v1.5.0/go.mod h1:Np7w3DINc9wB83p12fTAM3DPPhFnAKP0WTXRqCQJ6Z8=
+github.com/Minizbot2012/minxdr v0.0.0-20220202094826-a857b0dc7cc8 h1:/JPz++jqt4u1ITImmXTRtaWdrtYCLSX5dKEWBcVolMw=
+github.com/Minizbot2012/minxdr v0.0.0-20220202094826-a857b0dc7cc8/go.mod h1:Qtnd0s9q5lVY7qtAGJPYVsRsfNLsIMVhxYqm01ohZJk=
+github.com/OrbTools/OrbCommon v0.0.0-20220203010240-61c781cf2d9e h1:IB/I/ZSvw8ndgDIgYqVHb+40IfEUf4ueMAJyb1XEHQU=
+github.com/OrbTools/OrbCommon v0.0.0-20220203010240-61c781cf2d9e/go.mod h1:72K2oqIT9yLAhdgBHDz7J17lOiK4Mj9WWd2PbV42p24=
+github.com/bendahl/uinput v1.5.1 h1:zDa916qAqvph+LkLtMdomIoRYruLpBjEqC8hrmJLyXU=
+github.com/bendahl/uinput v1.5.1/go.mod h1:Np7w3DINc9wB83p12fTAM3DPPhFnAKP0WTXRqCQJ6Z8=
 github.com/google/gousb v1.1.1 h1:2sjwXlc0PIBgDnXtNxUrHcD/RRFOmAtRq4QgnFBE6xc=
 github.com/google/gousb v1.1.1/go.mod h1:b3uU8itc6dHElt063KJobuVtcKHWEfFOysOqBNzHhLY=
 github.com/gvalkov/golang-evdev v0.0.0-20191114124502-287e62b94bcb h1:WHSAxLz3P5t4DKukfJ5wu7+aMyVkuTNSbCiAjVS92sM=
@@ -12,5 +11,5 @@ github.com/gvalkov/golang-evdev v0.0.0-20191114124502-287e62b94bcb/go.mod h1:SAz
 github.com/lxn/win v0.0.0-20210218163916-a377121e959e h1:H+t6A/QJMbhCSEH5rAuRxh+CtW96g0Or0Fxa9IKr4uc=
 github.com/lxn/win v0.0.0-20210218163916-a377121e959e/go.mod h1:KxxjdtRkfNoYDCUP5ryK7XJJNTnpC8atvtmTheChOtk=
 golang.org/x/sys v0.0.0-20201018230417-eeed37f84f13/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
-golang.org/x/sys v0.0.0-20220128215802-99c3d69c2c27 h1:XDXtA5hveEEV8JB2l7nhMTp3t3cHp9ZpwcdjqyEWLlo=
-golang.org/x/sys v0.0.0-20220128215802-99c3d69c2c27/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+golang.org/x/sys v0.0.0-20220209214540-3681064d5158 h1:rm+CHSpPEEW2IsXUib1ThaHIjuBVZjxNgSKmBLFfD4c=
+golang.org/x/sys v0.0.0-20220209214540-3681064d5158/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
