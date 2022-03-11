@@ -12,5 +12,5 @@ require (
 
 require (
 	github.com/Minizbot2012/minxdr v0.0.0-20220202094826-a857b0dc7cc8 // indirect
-	golang.org/x/sys v0.0.0-20220209214540-3681064d5158 // indirect
+	golang.org/x/sys v0.0.0-20220310020820-b874c991c1a5 // indirect
 )
