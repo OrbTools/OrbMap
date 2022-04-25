@@ -1,7 +1,7 @@
 github.com/Minizbot2012/minxdr v0.0.0-20220202094826-a857b0dc7cc8 h1:/JPz++jqt4u1ITImmXTRtaWdrtYCLSX5dKEWBcVolMw=
 github.com/Minizbot2012/minxdr v0.0.0-20220202094826-a857b0dc7cc8/go.mod h1:Qtnd0s9q5lVY7qtAGJPYVsRsfNLsIMVhxYqm01ohZJk=
-github.com/OrbTools/OrbCommon v0.0.0-20220212000252-b6289748df6f h1:vnyoVv1QO8nB8W2JJm6d0l30rZ+tqIs4UEIL6h1TOsc=
-github.com/OrbTools/OrbCommon v0.0.0-20220212000252-b6289748df6f/go.mod h1:72K2oqIT9yLAhdgBHDz7J17lOiK4Mj9WWd2PbV42p24=
+github.com/OrbTools/OrbCommon v0.0.0-20220425205000-aaf3e62cf25e h1:eg1tH25ZS9slABwMcREfdC5bYna7Mk1Ne3xJKbvvkHg=
+github.com/OrbTools/OrbCommon v0.0.0-20220425205000-aaf3e62cf25e/go.mod h1:dzOiMMhs4DsiYpTmPNE74TE5/8RcZzaqokFI7sv8VTo=
 github.com/bendahl/uinput v1.5.1 h1:zDa916qAqvph+LkLtMdomIoRYruLpBjEqC8hrmJLyXU=
 github.com/bendahl/uinput v1.5.1/go.mod h1:Np7w3DINc9wB83p12fTAM3DPPhFnAKP0WTXRqCQJ6Z8=
 github.com/google/gousb v1.1.2 h1:1BwarNB3inFTFhPgUEfah4hwOPuDz/49I0uX8XNginU=
