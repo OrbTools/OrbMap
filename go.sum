@@ -1,9 +1,9 @@
-github.com/Minizbot2012/minxdr v0.0.0-20220508100252-9155da335217 h1:tZTM1IdSWocq7EAPGsdY2jjj9t8UrYBTtURY+k/9DME=
-github.com/Minizbot2012/minxdr v0.0.0-20220508100252-9155da335217/go.mod h1:CugH37YyOnWnXbxKk8w8qqn0hIOmsiFRG/jEAETqy3Q=
-github.com/OrbTools/OrbCommon v0.0.0-20220425205000-aaf3e62cf25e h1:eg1tH25ZS9slABwMcREfdC5bYna7Mk1Ne3xJKbvvkHg=
-github.com/OrbTools/OrbCommon v0.0.0-20220425205000-aaf3e62cf25e/go.mod h1:dzOiMMhs4DsiYpTmPNE74TE5/8RcZzaqokFI7sv8VTo=
-github.com/bendahl/uinput v1.6.0 h1:fM6r3OSC17rHh758mizKjSBuqi+XinhiGd4N3pWvZiI=
-github.com/bendahl/uinput v1.6.0/go.mod h1:Np7w3DINc9wB83p12fTAM3DPPhFnAKP0WTXRqCQJ6Z8=
+github.com/Minizbot2012/minxdr v0.0.0-20220508100252-3e26928db81f h1:DnrFvgpcTBjIw07I0XXcecqJDCIOtY0SfkDkypd3xFw=
+github.com/Minizbot2012/minxdr v0.0.0-20220508100252-3e26928db81f/go.mod h1:CugH37YyOnWnXbxKk8w8qqn0hIOmsiFRG/jEAETqy3Q=
+github.com/OrbTools/OrbCommon v0.0.0-20230830194105-c07ead8757aa h1:8/QE9iSDD1XPon7F+eT/eNluVFXUivMdYnU503KM4PY=
+github.com/OrbTools/OrbCommon v0.0.0-20230830194105-c07ead8757aa/go.mod h1:iN2QHwMfeXgvugVnHNlASquKJhdHYWfJIjjndtLTWWk=
+github.com/bendahl/uinput v1.6.2 h1:tIz52QyKDx1i1nObUkts3AZa/bULfLhPA5a+xKGlRPI=
+github.com/bendahl/uinput v1.6.2/go.mod h1:Np7w3DINc9wB83p12fTAM3DPPhFnAKP0WTXRqCQJ6Z8=
 github.com/google/gousb v1.1.2 h1:1BwarNB3inFTFhPgUEfah4hwOPuDz/49I0uX8XNginU=
 github.com/google/gousb v1.1.2/go.mod h1:GGWUkK0gAXDzxhwrzetW592aOmkkqSGcj5KLEgmCVUg=
 github.com/gvalkov/golang-evdev v0.0.0-20220815104727-7e27d6ce89b6 h1:K9b8efT9f1NkITNgNAm2A1LuoamhG4pAhXVjz5Sfa5Q=
@@ -11,5 +11,5 @@ github.com/gvalkov/golang-evdev v0.0.0-20220815104727-7e27d6ce89b6/go.mod h1:SAz
 github.com/lxn/win v0.0.0-20210218163916-a377121e959e h1:H+t6A/QJMbhCSEH5rAuRxh+CtW96g0Or0Fxa9IKr4uc=
 github.com/lxn/win v0.0.0-20210218163916-a377121e959e/go.mod h1:KxxjdtRkfNoYDCUP5ryK7XJJNTnpC8atvtmTheChOtk=
 golang.org/x/sys v0.0.0-20201018230417-eeed37f84f13/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
-golang.org/x/sys v0.2.0 h1:ljd4t30dBnAvMZaQCevtY0xLLD0A+bRZXbgLMLU1F/A=
-golang.org/x/sys v0.2.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+golang.org/x/sys v0.11.0 h1:eG7RXZHdqOJ1i+0lgLgCpSXAp6M3LYlAo6osgSi0xOM=
+golang.org/x/sys v0.11.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
